@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grau em radiano</title>
+</head>
+<body>
+  <h1 style="text-align: center;">
+    Transformador de grau em radiano
+  </h1>
+  <input min="0" type="number" id="userNumber" placeholder="Graus"></input>
+  <button onclick="calc()">Calcular</button>
+</body>
+<script>
+  const userNumber = document.getElementById('userNumber')
+  function calc() {
+    if (userNumber.value == "") return alert('Insira um número no campo númerico')
+    let divisor1 = userNumber.value
+    let divisor2 = 180
+    let resultado = simplificarDivisao(divisor1, divisor2);
+    if(divisor1 == 0) return alert(`Não existe radiano para 0`)
+    if (divisor1 == 180) {
+      alert(`O resultado é π`)
+    } else if (divisor1 == 360) {
+      alert(`O resultado é 2π`)
+    } else if (resultado[0] == 1) {
+      alert(`O resultado é π/${resultado[1]}`)
+    } else {
+      alert(`O resultado é ${resultado[0]}π/${resultado[1]}`)
+    }
+  }
+  function simplificarDivisao(num, divisor) {
+    let gcd = function (a, b) {
+      if (b == 0) {
+        return a;
+      } else {
+        return gcd(b, a % b);
+      }
+    };
+    let divisorComum = gcd(num, divisor);
+    return [num / divisorComum, divisor / divisorComum];
+  }
+</script>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  h1 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  input {
+    border-radius: 1000000px;
+    border-width: 1px;
+    padding: 5px;
+    margin: 20px;
+  }
+
+  button {
+    align-items: center;
+    appearance: none;
+    background-color: #3EB2FD;
+    background-image: linear-gradient(1deg, #4F58FD, #149BF3 99%);
+    background-size: calc(100% + 20px) calc(100% + 20px);
+    border-radius: 100px;
+    border-width: 0;
+    box-shadow: none;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: CircularStd, sans-serif;
+    font-size: 1rem;
+    height: auto;
+    justify-content: center;
+    line-height: 1.5;
+    padding: 6px 20px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color .2s, background-position .2s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: top;
+    white-space: nowrap;
+  }
+
+  button:active,
+  button:focus {
+    outline: none;
+  }
+
+  button:hover {
+    background-position: -20px -20px;
+  }
+
+  button:focus:not(:active) {
+    box-shadow: rgba(40, 170, 255, 0.25) 0 0 0 .125em;
+  }
+</style>
+
+</html>
